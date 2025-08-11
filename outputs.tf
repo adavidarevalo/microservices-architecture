@@ -38,3 +38,13 @@ output "rds_username" {
   value       = module.rds.db_username
   sensitive   = true
 }
+
+output "ses_email_identity_arn" {
+  description = "SES email identity ARN"
+  value       = module.ses_email.email_identity_arn
+}
+
+output "ses_verified_email" {
+  description = "SES verified email address"
+  value       = module.ses_email.email_address
+}

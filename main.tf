@@ -34,6 +34,18 @@ module "rds" {
   database_subnet_ids = module.vpc.database_subnet_ids
   master_password     = var.db_password
 
+  common_tags = {
+    Name        = var.name_prefix
+    Environment = var.environment
+    Owner       = var.owner
+    CostCenter  = var.cost_center
+  }
+}
+
+module "ses_email" {
+  source = "./modules/ses-email"
+
+  email_address = "davidarevaloc20@gmail.com"
 
   common_tags = {
     Name        = var.name_prefix
