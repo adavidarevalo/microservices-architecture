@@ -54,3 +54,25 @@ module "ses_email" {
     CostCenter  = var.cost_center
   }
 }
+
+module "alb" {
+  source = "./modules/alb"
+
+  name_prefix       = var.name_prefix
+  vpc_id            = module.vpc.vpc_id
+  public_subnet_ids = module.vpc.public_subnet_ids
+
+  common_tags = {
+    Name        = var.name_prefix
+    Environment = var.environment
+    Owner       = var.owner
+    CostCenter  = var.cost_center
+  }
+}
+
+module "route53" {
+  source = "./modules/route53"
+
+  alb_dns_name = module.alb.alb_dns_name
+  alb_zone_id  = module.alb.alb_zone_id
+}

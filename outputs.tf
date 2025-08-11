@@ -48,3 +48,18 @@ output "ses_verified_email" {
   description = "SES verified email address"
   value       = module.ses_email.email_address
 }
+
+output "alb_dns_name" {
+  description = "ALB DNS name"
+  value       = module.alb.alb_dns_name
+}
+
+output "alb_url" {
+  description = "ALB URL"
+  value       = "http://${module.alb.alb_dns_name}"
+}
+
+output "custom_domain_url" {
+  description = "Custom domain URL"
+  value       = "http://${module.route53.route53_record_fqdn}"
+}
